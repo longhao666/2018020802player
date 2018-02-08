@@ -279,6 +279,10 @@ Player::~Player()
 
 bool Player::isPlayerAvailable() const
 {
+    /**
+      Returns true if the service is available for use.
+      译文：如果服务可用，返回true。
+      */
     return player->isAvailable();
 }
 
@@ -303,12 +307,15 @@ The easiest way to create a QFileDialog is to use the static functions.
     QFileDialog fileDialog(this);
     fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
     fileDialog.setWindowTitle(tr("Open Files"));
+//    fileDialog.setDirectory("");
     QStringList supportedMimeTypes = player->supportedMimeTypes();
+    qDebug() << "supportedMimeTypes =" << supportedMimeTypes << __func__;
     if (!supportedMimeTypes.isEmpty()) {
         supportedMimeTypes.append("audio/x-m3u"); // MP3 playlists
         fileDialog.setMimeTypeFilters(supportedMimeTypes);
     }
     fileDialog.setDirectory(QStandardPaths::standardLocations(QStandardPaths::MoviesLocation).value(0, QDir::homePath()));
+//    fileDialog.setDirectory("");
     if (fileDialog.exec() == QDialog::Accepted)
         addToPlaylist(fileDialog.selectedUrls());
     //qDebug("chule open");
@@ -407,8 +414,23 @@ void Player::previousClicked()
     // Go to previous track if we are within the first 5 seconds of playback
     // Otherwise, seek to the beginning.
     if(player->position() <= 5000)
+        /**
+Return to the previous media content in playlist.
+译文：返回到播放列表中的前一个媒体内容。
+          */
         playlist->previous();
     else
+        /**
+This property holds the playback position of the current media.
+The value is the current playback position, expressed in milliseconds since the beginning of the media.
+Periodically changes in the position will be indicated with the signal positionChanged(),
+the interval between updates can be set with QMediaObject's method setNotifyInterval().
+译文：
+此属性保存当前媒体的播放位置。
+该值是当前播放位置，自媒体开始时以毫秒表示。
+位置的周期性变化将用信号positionChanged()表示，
+更新的间隔可以设置为QMediaObject的方法setNotifyInterval()。
+          */
         player->setPosition(0);
 }
 
