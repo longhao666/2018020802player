@@ -59,6 +59,7 @@ class QVideoWidget;
 class QAudioProbe;
 QT_END_NAMESPACE
 
+
 class PlaylistModel;
 class HistogramWidget;
 

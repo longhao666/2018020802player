@@ -70,7 +70,7 @@ public:
 
     QMediaPlaylist *playlist() const;
     void setPlaylist(QMediaPlaylist *playlist);
-
+    //Qt::DisplayRole   0   The key data to be rendered in the form of text. (QString)
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::DisplayRole) override;
 
 private slots:

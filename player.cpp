@@ -51,7 +51,6 @@
 #include <QMediaMetaData>
 #include <QtWidgets>
 
-
 /**
  * @brief Player::Player
  * @param parent
@@ -65,7 +64,6 @@ Player::Player(QWidget *parent)
     , colorDialog(0)
 {
 //! [create-objs]
-
 
     /**
 The QMediaPlayer class allows the playing of a media source.
@@ -314,8 +312,8 @@ The easiest way to create a QFileDialog is to use the static functions.
         supportedMimeTypes.append("audio/x-m3u"); // MP3 playlists
         fileDialog.setMimeTypeFilters(supportedMimeTypes);
     }
-    fileDialog.setDirectory(QStandardPaths::standardLocations(QStandardPaths::MoviesLocation).value(0, QDir::homePath()));
-//    fileDialog.setDirectory("");
+//    fileDialog.setDirectory(QStandardPaths::standardLocations(QStandardPaths::MoviesLocation).value(0, QDir::homePath()));
+//    fileDialog.setDirectory("./");
     if (fileDialog.exec() == QDialog::Accepted)
         addToPlaylist(fileDialog.selectedUrls());
     //qDebug("chule open");

@@ -85,15 +85,15 @@ private slots:
     void onVolumeSliderValueChanged();
 
 private:
-    QMediaPlayer::State playerState;
-    bool playerMuted;
-    QAbstractButton *playButton;
-    QAbstractButton *stopButton;
-    QAbstractButton *nextButton;
-    QAbstractButton *previousButton;
-    QAbstractButton *muteButton;
-    QAbstractSlider *volumeSlider;
-    QComboBox *rateBox;
+    QMediaPlayer::State playerState; //播放状态
+    bool playerMuted; //静音状态
+    QAbstractButton *playButton; //开始/暂停
+    QAbstractButton *stopButton; //停止/退出
+    QAbstractButton *nextButton; //下一首
+    QAbstractButton *previousButton; //上一首
+    QAbstractButton *muteButton; //静音
+    QAbstractSlider *volumeSlider; //音量
+    QComboBox *rateBox; //播放速度
 };
 
 #endif // PLAYERCONTROLS_H

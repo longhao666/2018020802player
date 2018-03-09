@@ -95,6 +95,11 @@ QMediaPlaylist *PlaylistModel::playlist() const
     return m_playlist;
 }
 
+/**
+ * @brief PlaylistModel::setPlaylist
+ * @param playlist
+ * 把歌单列表传入进来
+ */
 void PlaylistModel::setPlaylist(QMediaPlaylist *playlist)
 {
     if (m_playlist) {
@@ -104,7 +109,7 @@ void PlaylistModel::setPlaylist(QMediaPlaylist *playlist)
         disconnect(m_playlist, SIGNAL(mediaRemoved(int,int)), this, SLOT(endRemoveItems()));
         disconnect(m_playlist, SIGNAL(mediaChanged(int,int)), this, SLOT(changeItems(int,int)));
     }
-
+    //开启一个模型复位操作
     beginResetModel();
     m_playlist = playlist;
 
@@ -115,12 +120,13 @@ void PlaylistModel::setPlaylist(QMediaPlaylist *playlist)
         connect(m_playlist, SIGNAL(mediaRemoved(int,int)), this, SLOT(endRemoveItems()));
         connect(m_playlist, SIGNAL(mediaChanged(int,int)), this, SLOT(changeItems(int,int)));
     }
-
+    //完成模型复位操作
     endResetModel();
 }
 
 bool PlaylistModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
+    // 显示这个参数在这个函数中不用,可以消除警告
     Q_UNUSED(role);
     m_data[index] = value;
     emit dataChanged(index, index);

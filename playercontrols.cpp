@@ -59,37 +59,32 @@ PlayerControls::PlayerControls(QWidget *parent)
     , volumeSlider(0)
     , rateBox(0)
 {
+    // 1
     playButton = new QToolButton(this);
     playButton->setIcon(style()->standardIcon(QStyle::SP_MediaPlay));
-
     connect(playButton, SIGNAL(clicked()), this, SLOT(playClicked()));
-
+    // 2
     stopButton = new QToolButton(this);
     stopButton->setIcon(style()->standardIcon(QStyle::SP_MediaStop));
     stopButton->setEnabled(false);
-
     connect(stopButton, SIGNAL(clicked()), this, SIGNAL(stop()));
-
+    // 3
     nextButton = new QToolButton(this);
     nextButton->setIcon(style()->standardIcon(QStyle::SP_MediaSkipForward));
-
     connect(nextButton, SIGNAL(clicked()), this, SIGNAL(next()));
-
+    // 4
     previousButton = new QToolButton(this);
     previousButton->setIcon(style()->standardIcon(QStyle::SP_MediaSkipBackward));
-
     connect(previousButton, SIGNAL(clicked()), this, SIGNAL(previous()));
-
+    // 5
     muteButton = new QToolButton(this);
     muteButton->setIcon(style()->standardIcon(QStyle::SP_MediaVolume));
-
     connect(muteButton, SIGNAL(clicked()), this, SLOT(muteClicked()));
-
+    // 6
     volumeSlider = new QSlider(Qt::Horizontal, this);
     volumeSlider->setRange(0, 100);
-
     connect(volumeSlider, SIGNAL(valueChanged(int)), this, SLOT(onVolumeSliderValueChanged()));
-
+    // 7
     rateBox = new QComboBox(this);
     rateBox->addItem("0.5x", QVariant(0.5));
     rateBox->addItem("1.0x", QVariant(1.0));
@@ -110,11 +105,19 @@ PlayerControls::PlayerControls(QWidget *parent)
     setLayout(layout);
 }
 
+/*
+ * 返回播放状态
+ *
+*/
 QMediaPlayer::State PlayerControls::state() const
 {
     return playerState;
 }
 
+/*
+ * 设置播放状态
+ *
+*/
 void PlayerControls::setState(QMediaPlayer::State state)
 {
     if (state != playerState) {
@@ -171,8 +174,12 @@ void PlayerControls::setMuted(bool muted)
     }
 }
 
+/*
+ * 播放按钮点击事件
+*/
 void PlayerControls::playClicked()
 {
+    // 播放时点就是暂停,停止或暂停时点就是播放
     switch (playerState) {
     case QMediaPlayer::StoppedState:
     case QMediaPlayer::PausedState:
